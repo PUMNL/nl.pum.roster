@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<menu>
+  <item>
+    <path>civicrm/buildroster</path>
+    <page_callback>CRM_Roster_Form_BuildRoster</page_callback>
+    <title>BuildRoster</title>
+    <access_arguments>access CiviCRM</access_arguments>
+  </item>
+  <item>
+    <path>civicrm/rosterview</path>
+    <page_callback>CRM_Roster_Page_RosterView</page_callback>
+    <title>RosterView</title>
+    <access_arguments>access CiviCRM</access_arguments>
+  </item>
+</menu>
