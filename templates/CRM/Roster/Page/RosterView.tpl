@@ -10,9 +10,6 @@
 			<th>{$labels.links}</th>
 		</tr>
 {assign var="rowClass" value="odd-row"}
-{if ! isset($var)}
-
-{else}
 {foreach from=$rows key=index item=record}
 		<tr id="row_{$index}" class={$rowClass}>
 {if $record.id eq ''}
