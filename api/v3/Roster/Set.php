@@ -62,7 +62,7 @@ function civicrm_api3_roster_set($params) {
 		'sequential' => 1,
 		'name' => $params['name'],
 	);
-	$api_result = civicrm_api('Roster', 'ispresent', $api_params);
+	$api_result = civicrm_api('Roster', 'IsPresent', $api_params);
 	if ($api_result['count']==0) {
 		$method = 'insert';
 		$sql_cols[] = 'name';
@@ -83,7 +83,7 @@ function civicrm_api3_roster_set($params) {
 			'sequential' => 1,
 			'name' => $params['name'],
 		);
-		$verify_result = civicrm_api('Roster', 'get', $verify_params);
+		$verify_result = civicrm_api('Roster', 'Get', $verify_params);
 		$verify_success = FALSE;
 		foreach($verify_result['values'] as $vkey=>$vvalue) {
 			if ($verify_result['values'][$vkey]['id']==$params['id']) {

@@ -48,7 +48,7 @@ function civicrm_api3_roster_get($params) {
   }
   if ($filter['column'] != '') {
 	// check presence of requested roster id or name
-	$api_result = civicrm_api('Roster', 'ispresent', $api_params);
+	$api_result = civicrm_api('Roster', 'IsPresent', $api_params);
 	if ($api_result['count']==0) {
 		// record does not exist
 		return civicrm_api3_create_success(NULL, $params);

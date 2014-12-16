@@ -24,7 +24,7 @@ class CRM_Roster_Form_BuildRoster extends CRM_Core_Form {
 			'sequential' => 1,
 			'id' => $id,
 		);
-		$result = civicrm_api('Roster', 'get', $params);
+		$result = civicrm_api('Roster', 'Get', $params);
 		if ($result['count']==1) {
 			$roster = $result['values'][0];
 		} else {
@@ -342,7 +342,7 @@ class CRM_Roster_Form_BuildRoster extends CRM_Core_Form {
 	foreach($sql_values as $key=>$value) {
 		$params[$key] = $value;
 	}
-	$result = civicrm_api('Roster', 'set', $params);
+	$result = civicrm_api('Roster', 'Set', $params);
 	if (!empty($result['is_error'])) {
 		$msg = ts('Error while saving');
 		if (!empty($result['error_message'])) {

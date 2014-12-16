@@ -101,7 +101,7 @@ function civicrm_api3_roster_schedulenext($params) {
 		'last_run' => date('Y-m-d'),
 		'next_run' => $dt,
 	);
-	$result = civicrm_api('Roster', 'set', $set_params);
+	$result = civicrm_api('Roster', 'Set', $set_params);
 	
 	$returnValues = 0;
 	if (empty($result['is_error'])) {

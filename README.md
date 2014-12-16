@@ -55,7 +55,7 @@ If no privilege was registered, everyone is allowed to edit the roster.
        'sequential' => 1,
        'name' => 'myRoster',
      );
-     $result = civicrm_api('Roster', 'isallowed', $params);
+     $result = civicrm_api('Roster', 'IsAllowed', $params);
 
 Note: if $result['values'] equals 1, you should allow your job to continue. If it equals 0, bring further execution to a halt.
 
@@ -70,7 +70,7 @@ Note: if $result['values'] equals 1, you should allow your job to continue. If i
       'sequential' => 1,
       'name' => 'myRoster',
     );
-    $result = civicrm_api('Roster', 'schedulenext', $params);
+    $result = civicrm_api('Roster', 'ScheduleNext', $params);
 
 Note: this API will includes an additional check at IsAllowed and return an error if execution is/was not supposed to fire. On success, you will see that $result['values']==1.
    

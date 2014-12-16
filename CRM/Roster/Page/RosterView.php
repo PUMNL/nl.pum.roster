@@ -15,7 +15,7 @@ class CRM_Roster_Page_RosterView extends CRM_Core_Page {
 		'q' => 'civicrm/ajax/rest',
 		'sequential' => 1,
 	);
-	$result = civicrm_api('Roster', 'get', $params);
+	$result = civicrm_api('Roster', 'Get', $params);
 	
 	if($result['count']<1) {
 		$values = array(
