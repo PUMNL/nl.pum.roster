@@ -19,8 +19,10 @@ class CRM_Roster_Page_RosterView extends CRM_Core_Page {
 	
 	if($result['count']<1) {
 		$values = array(
-			'id'		=> '',
-			'name'		=> ts('No details found'),
+			array(
+				'id'		=> '',
+				'name'		=> ts('No details found'),
+			),
 		);
 	} else {
 		$values = $result['values'];
