@@ -26,7 +26,7 @@ function _civicrm_api3_roster_set_spec(&$spec) {
 		'title'			=> 'Days, concateted by \':\' (\'0:1:3\' for Sun, Mon en Wed or \'1:15\' for 1st and 15th in the month',
 		'type'			=> 'string',
 	);
-	$spec['interval'] = array(
+	$spec['min_interval'] = array(
 		'title'			=> 'Interval (days) before next run is allowed',
 		'type'			=> 'int',
 	);
@@ -96,7 +96,7 @@ function civicrm_api3_roster_set($params) {
 	}
   }
   if (array_key_exists('type', $params)) {
-	if (in_array($params['type'], array('w', 'm'))) { 
+	if (in_array($params['type'], array('w', 'm'))) {
 		$sql_cols[] = 'type';
 		$sql_vals[] = '\'' . $params['type'] . '\'';
 	} else {
@@ -127,7 +127,7 @@ function civicrm_api3_roster_set($params) {
 	$sql_cols[] = 'privilege';
 	$sql_vals[] = '\'' . $params['privilege'] . '\'';
   }
-  
+
   if ($method=='insert') {
 	$sql = 'INSERT INTO civicrm_pum_roster (' . implode(', ', $sql_cols) . ') VALUES (' . implode(', ', $sql_vals) . ')';
   } else {
@@ -143,7 +143,7 @@ function civicrm_api3_roster_set($params) {
 	$sql = 'UPDATE civicrm_pum_roster SET ' . implode(', ', $sql_vals) . ' WHERE ' . implode(' AND ', $sql_keys);
   }
   $dao = CRM_Core_DAO::executeQuery($sql);
-  
+
   if (!property_exists($dao , 'is_error')) {
 	$returnValues = array();
 	return civicrm_api3_create_success($returnValues, $params);

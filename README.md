@@ -29,7 +29,7 @@ Instructions:
          'next_run' => date('Y-m-d', strtotime('-1 days')),
          'privilege' => 'myPrivilege',
        );
-       $result = civicrm_api('Roster', 'set', $params);
+       $result = civicrm_api('Roster', 'Set', $params);
        if (!empty($result['is_error'])) {
          return FALSE;
        }
@@ -73,4 +73,3 @@ Note: if $result['values'] equals 1, you should allow your job to continue. If i
     $result = civicrm_api('Roster', 'ScheduleNext', $params);
 
 Note: this API will includes an additional check at IsAllowed and return an error if execution is/was not supposed to fire. On success, you will see that $result['values']==1.
-   

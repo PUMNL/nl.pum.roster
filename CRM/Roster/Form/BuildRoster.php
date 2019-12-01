@@ -31,14 +31,14 @@ class CRM_Roster_Form_BuildRoster extends CRM_Core_Form {
 			$this->assign('warning', ts('Error: record not found'));
 		}
 	}
-	
+
 	// title
 	if (is_null($roster)) {
 		CRM_Utils_System::setTitle(ts('Roster'));
 	} else {
 		CRM_Utils_System::setTitle(ts('Roster: ' . $roster['name']));
 	}
-	
+
 	// read or edit mode
 	$mode = 'read';
 	if ($roster['privilege']=='') {
@@ -49,12 +49,12 @@ class CRM_Roster_Form_BuildRoster extends CRM_Core_Form {
 		}
 	}
 	$this->assign('mode', $mode);
-		
+
     // add form elements (read and edit specific)
 	$types = CRM_Roster_Const::rostertype();
 	$weekdays = CRM_Roster_Const::weekdays();
 	$buttons = array();
-	
+
 	if ($mode=='read') {
 		// readmode: values as texts
 		// type
@@ -63,7 +63,7 @@ class CRM_Roster_Form_BuildRoster extends CRM_Core_Form {
 			'value' => $types[$roster['type']],
 			'code'	=> $roster['type'],
 		));
-		
+
 		switch($roster['type']) {
 			case 'w':
 				// selection day(s) in week
@@ -87,19 +87,19 @@ class CRM_Roster_Form_BuildRoster extends CRM_Core_Form {
 			default:
 				// value(s) not included
 		}
-		
+
 		// interval (in days)
 		$this->assign('roster_interval_txt', array(
 			'label' => ts('Minimum interval'),
 			'value' => $roster['min_interval'],
 		));
-		
+
 		// next run
 		$this->assign('roster_nextrun_txt', array(
 			'label' => ts('Next run'),
 			'value' => $roster['next_run'],
 		));
-		
+
 	} else {
 		// editmode: values as fields (except name, last_run and privilege)
 		// id
@@ -128,7 +128,7 @@ class CRM_Roster_Form_BuildRoster extends CRM_Core_Form {
 			$types, // list of options
 			true // is required
 		);
-		
+
 		// selection day(s) in week
 		$fld = $this->addElement(
 			'advmultiselect',
@@ -143,7 +143,7 @@ class CRM_Roster_Form_BuildRoster extends CRM_Core_Form {
 		);
 		$fld->setButtonAttributes('add', array('value' => ts('Add >>')));
 		$fld->setButtonAttributes('remove', array('value' => ts('<< Remove')));
-		
+
 		// selection day(s) in month
 		$fld = $this->addElement(
 			'advmultiselect',
@@ -158,7 +158,7 @@ class CRM_Roster_Form_BuildRoster extends CRM_Core_Form {
 		);
 		$fld->setButtonAttributes('add', array('value' => ts('Add >>')));
 		$fld->setButtonAttributes('remove', array('value' => ts('<< Remove')));
-		
+
 		// interval (in days)
 		$this->add(
 		  'text', // field type
@@ -166,7 +166,7 @@ class CRM_Roster_Form_BuildRoster extends CRM_Core_Form {
 		  ts('Minimum interval'), // field label
 		  true // is required
 		);
-		
+
 		// next run
 		$yearsInPast   = 0;
 		$yearsInFuture = 1;
@@ -177,9 +177,9 @@ class CRM_Roster_Form_BuildRoster extends CRM_Core_Form {
 			ts('Next run'),
 			CRM_Core_SelectValues::date('custom', $yearsInPast, $yearsInFuture, $dateParts)
 		);
-		
+
 	}
-	
+
 	// add the last form elements (for both read and edit) that can never be edited
 	// last run
 	$this->assign('roster_lastrun_txt', array(
@@ -190,7 +190,7 @@ class CRM_Roster_Form_BuildRoster extends CRM_Core_Form {
 		'label' => ts('Privilege'),
 		'value' => $roster['privilege'],
 	));
-	
+
 	// buttons
 	if ($mode=='edit') {
 		$buttons[] = array(
@@ -205,8 +205,8 @@ class CRM_Roster_Form_BuildRoster extends CRM_Core_Form {
 		'isDefault' => TRUE,
 	);
     $this->addButtons($buttons);
-	
-	
+
+
 	// default values
 	$useDefault = TRUE;
 	if (!is_null($roster)) {
@@ -253,7 +253,7 @@ class CRM_Roster_Form_BuildRoster extends CRM_Core_Form {
 					'value' => '',
 				));
 	}
-	
+
 	// apply default values
 	if (isset($defaults)) {
 		$this->setDefaults($defaults);
@@ -270,7 +270,7 @@ class CRM_Roster_Form_BuildRoster extends CRM_Core_Form {
   function addRules() {
     $this->addFormRule(array('CRM_Roster_Form_BuildRoster', 'RosterValidation'));
   }
-  
+
   /**
    * Validation callback for BuildRoster
    */
@@ -307,7 +307,7 @@ class CRM_Roster_Form_BuildRoster extends CRM_Core_Form {
   function postProcess() {
     $values = $this->exportValues();
 	$sql_values = array();
-	
+
 	$today = date_create();
 	$y = $today->format('Y');
 	$date = date_create();
@@ -331,9 +331,9 @@ class CRM_Roster_Form_BuildRoster extends CRM_Core_Form {
 		default:
 			// should not occur unless other types got introduced
 	}
-	$sql_values['interval'] = $values['roster_interval'];
+	$sql_values['min_interval'] = $values['roster_interval'];
 	$sql_values['next_run'] = $date->format('Y-m-d');
-	
+
 	$params = array(
 	  'version' => 3,
 	  'q' => 'civicrm/ajax/rest',

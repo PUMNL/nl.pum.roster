@@ -8,8 +8,8 @@
     <author>Ralph Kersten</author>
     <email>helpdesk@pum.nl</email>
   </maintainer>
-  <releaseDate>2014-11-07</releaseDate>
-  <version>1.0</version>
+  <releaseDate>2019-12-06</releaseDate>
+  <version>1.1</version>
   <develStage>alpha</develStage>
   <compatibility>
     <ver>4.2</ver>
