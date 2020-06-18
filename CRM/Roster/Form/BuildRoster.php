@@ -350,7 +350,7 @@ class CRM_Roster_Form_BuildRoster extends CRM_Core_Form {
 		}
 		CRM_Core_Session::setStatus(ts($msg), 'error', array('expires'=>0));
 	}
-	CRM_Utils_System::redirect('civicrm/rosterview');
+	CRM_Utils_System::redirect('rosterview');
   }
 
 
